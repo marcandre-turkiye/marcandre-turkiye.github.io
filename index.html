@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>M&amp;A Türkiye</title>
+<!-- start_url verilmiyor: ana ekrana eklenen simge, müşterinin kendi linkiyle (?t=KOD) açılır -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="M&amp;A Türkiye">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#ffffff">
+<style>
+html,body{margin:0;height:100%;background:#fff;font-family:"Segoe UI",Roboto,Arial,sans-serif}
+#form{position:fixed;inset:0;width:100%;height:100%;border:0;background:#f6f4ef;opacity:0;transition:opacity .3s}
+#form.hazir{opacity:1}
+#acilis{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#181818;text-align:center;padding:24px}
+#acilis img{width:130px;height:auto}
+#acilis b{margin-top:16px;font-weight:400;font-size:19px;letter-spacing:.32em;padding-left:.32em}
+#acilis small{margin-top:8px;color:#81694a;letter-spacing:.2em;font-size:12px}
+#acilis p{margin-top:32px;color:#767676;font-size:14px;max-width:280px}
+</style>
+</head>
+<body>
+<div id="acilis">
+  <img src="logo-kutu.png" alt="Marc &amp; André">
+  <b>MARC &amp; ANDRÉ</b>
+  <small>TÜRKİYE · SS27 SİPARİŞ</small>
+  <p id="mesaj">Yükleniyor…</p>
+</div>
+<script>
+// Bugünkü sipariş formu; müşteri kodu (t) ve dil (l) olduğu gibi aktarılır
+var FORM = 'https://script.google.com/macros/s/AKfycbz2cg5VGNJmqJ_PPaPdruvPxKRz_9H9L3iRtPYnkuNP-Qzk7yt7cAWEwOyk3iOx8Q4Orw/exec';
+var q = new URLSearchParams(location.search);
+if (!q.get('t')) {
+  document.getElementById('mesaj').textContent = 'Lütfen size gönderilen sipariş linkini açın.';
+} else {
+  var f = document.createElement('iframe');
+  f.id = 'form';
+  f.title = 'Sipariş formu';
+  f.src = FORM + '?' + q.toString();
+  f.onload = function () { f.classList.add('hazir'); };
+  document.body.appendChild(f);
+}
+</script>
+</body>
+</html>
